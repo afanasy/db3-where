@@ -1,0 +1,29 @@
+{
+  "name": "js-where",
+  "version": "1.0.0",
+  "description": "Filtering rules in JSON format",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/afanasy/js-where.git"
+  },
+  "author": "Afanasii Kurakin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/afanasy/js-where/issues"
+  },
+  "homepage": "https://github.com/afanasy/js-where",
+  "dependencies": {
+    "underscore": "*",
+    "sqlstring": "*"
+  },
+  "devDependencies": {
+    "expect.js": "*",
+    "mocha": "*"
+  },
+  "engines": {
+    "node": ">= 0.10"
+  }
+}
