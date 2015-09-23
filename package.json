@@ -1,6 +1,6 @@
 {
   "name": "js-where",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Filtering rules in JSON format",
   "scripts": {
     "test": "./node_modules/.bin/mocha"
