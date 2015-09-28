@@ -33,7 +33,15 @@ var app = module.exports = {
     var self = this
     if (set)
       return _.map(d, function (value, key) {return app.pair(key, value, null, true, true, set)}).join(delimiter)
-    return _.map(this.and(d), function (d) {return sqlString.escapeId(String(d.key)) + ' ' + app.queryOperator(d.operator, d.value) + ' ' + app.escape(d.value)}).join(' and ')
+    return _.map(this.and(d), function (d) {
+      if (_.isArray(d.value) && !d.value.length) {
+        if (d.operator == '=')
+          return 0
+        if (d.operator == '!=')
+          return 1
+      }
+      return sqlString.escapeId(String(d.key)) + ' ' + app.queryOperator(d.operator, d.value) + ' ' + app.escape(d.value)
+    }).join(' and ')
   },
   queryOperator: function (operator, value) {
     if (operator == '=') {

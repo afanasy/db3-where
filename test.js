@@ -28,11 +28,17 @@ describe('where', function () {
     it('translates object with = operator and array', function () {
       expect(where.query({id: {'=': [1]}})).to.be('`id` in (1)')
     })
+    it('translates object with = operator and empty array', function () {
+      expect(where.query({id: {'=': []}})).to.be('0')
+    })
     it('translates object with != operator and null', function () {
       expect(where.query({id: {'!=': null}})).to.be('`id` is not null')
     })
     it('translates object with != operator and array', function () {
       expect(where.query({id: {'!=': [1]}})).to.be('`id` not in (1)')
+    })
+    it('translates object with != operator and empty array', function () {
+      expect(where.query({id: {'!=': []}})).to.be('1')
     })
   })
   describe('#sort', function () {
