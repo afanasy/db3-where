@@ -15,8 +15,9 @@ where.filter(filter)
 where.query({id: 1, name: 'Adam'})
 // returns `id` = 1 and name = 'Adam'
 where.query({id: [1, 2, 3]})
-// returns `id` in (1, 2,3)
-where.query({id: {from: 1, to: 2}})
+// returns `id` in (1, 2, 3)
+where.query({id: {'>=': 1, '=<': 2}})
+// returns `id` >= 1 and `id` =< 2
 ```
 #### Array.filter
 ```js
@@ -31,7 +32,7 @@ fruit.filter(where.filter(1))
 fruit.filter(where.filter({id: [1, 2]}))
 // fruit will be
 // [{id: 1, name: 'Banana'}, {id: 2, name: 'Apple'}]
-fruit.filter(where.filter({id: {from: 2, to: 3}}))
+fruit.filter(where.filter({id: {'>=': 2, '<=': 3}}))
 // fruit will be
 // [{id: 2, name: 'Apple'}, {id: 3, name: 'Apple'}]
 ```
