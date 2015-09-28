@@ -4,7 +4,7 @@
 
 ### Usage
 ```js
-var where = require('js-where')
+var where = require('db3-where')
 where.query(filter)
 //returns corresponding sql `where` clause
 where.filter(filter)
@@ -39,9 +39,9 @@ fruit.filter(where.filter({id: {from: 2, to: 3}}))
 ### When is this useful?
 If you want to use the same filtering rules for js `Array.filter` and SQL `where`.
 
-[downloads-image]: https://img.shields.io/npm/dm/js-where.svg
-[downloads-url]: https://npmjs.org/package/js-where
-[node-version-image]: http://img.shields.io/node/v/js-where.svg
+[downloads-image]: https://img.shields.io/npm/dm/db3-where.svg
+[downloads-url]: https://npmjs.org/package/db3-where
+[node-version-image]: http://img.shields.io/node/v/db3-where.svg
 [node-version-url]: http://nodejs.org/download/
-[travis-image]: https://img.shields.io/travis/afanasy/js-where/master.svg
-[travis-url]: https://travis-ci.org/afanasy/js-where
+[travis-image]: https://img.shields.io/travis/afanasy/db3-where/master.svg
+[travis-url]: https://travis-ci.org/afanasy/db3-where

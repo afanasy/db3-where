@@ -1,5 +1,5 @@
 {
-  "name": "js-where",
+  "name": "db3-where",
   "version": "1.0.1",
   "description": "Filtering rules in JSON format",
   "scripts": {
@@ -7,14 +7,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/afanasy/js-where.git"
+    "url": "https://github.com/afanasy/db3-where.git"
   },
   "author": "Afanasii Kurakin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/afanasy/js-where/issues"
+    "url": "https://github.com/afanasy/db3-where/issues"
   },
-  "homepage": "https://github.com/afanasy/js-where",
+  "homepage": "https://github.com/afanasy/db3-where",
   "dependencies": {
     "underscore": "*",
     "sqlstring": "*"
