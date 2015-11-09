@@ -3,36 +3,9 @@ var
   sqlString = require('sqlstring')
 
 var app = module.exports = {
-  escape: function (value, set) {
-    if (_.isNaN(value) || _.isNull(value) || _.isUndefined(value))
-      return 'null'
-    if (_.isNumber(value))
-      return value
-    if (_.isBoolean(value))
-      return +value
-    if (!set) {
-      if (_.isArray(value))
-        return '(' + _.map(value, function (d) {return app.escape(d, set)}).join(', ') + ')'
-      if (_.isObject(value)) {
-        if (!_.isUndefined(value.from) && !_.isUndefined(value.to))
-          return app.escape(value.from, set) + ' and ' + app.escape(value.to, set)
-        if (!_.isUndefined(value.from))
-          return app.escape(value.from, set)
-        if (!_.isUndefined(value.to))
-          return app.escape(value.to, set)
-      }
-    }
-    return sqlString.escape(String(value))
-  },
-  query: function (d, set) {
-    var delimiter = ' and '
-    if (set)
-      delimiter = ', '
+  query: function (d) {
     if (_.isNumber(d) || _.isString(d))
       d = {id: +d}
-    var self = this
-    if (set)
-      return _.map(d, function (value, key) {return app.pair(key, value, null, true, true, set)}).join(delimiter)
     return _.map(this.and(d), function (d) {
       if (_.isArray(d.value) && !d.value.length) {
         if (d.operator == '=')
@@ -40,7 +13,8 @@ var app = module.exports = {
         if (d.operator == '!=')
           return 1
       }
-      return sqlString.escapeId(String(d.key)) + ' ' + app.queryOperator(d.operator, d.value) + ' ' + app.escape(d.value)
+      return sqlString.format('?? ', d.key) + app.queryOperator(d.operator, d.value) + ' ' + app.queryValue(d.value)
+      sqlString.format(' ?', [d.value])
     }).join(' and ')
   },
   queryOperator: function (operator, value) {
@@ -57,6 +31,17 @@ var app = module.exports = {
         return 'not in'
     }
     return operator
+  },
+  queryValue: function (value) {
+    if (_.isNaN(value) || _.isNull(value) || _.isUndefined(value))
+      return 'null'
+    if (_.isNumber(value))
+      return value
+    if (_.isBoolean(value))
+      return +value
+    if (_.isArray(value))
+      return sqlString.format('(?)', [value])
+    return sqlString.format('?', [value])
   },
   and: function (d) {
     var and = []
@@ -75,32 +60,6 @@ var app = module.exports = {
       }
     })
     return and
-  },
-  pair: function (key, value, operator, escapeKey, escapeValue, set) {
-    operator = operator || '='
-    if (!set) {
-      if ((_.isNaN(value) || _.isNull(value) || _.isUndefined(value)) && (operator == '='))
-        operator = 'is'
-      if (_.isArray(value))
-        operator = 'in'
-      if (_.isObject(value)) {
-        if (!_.isUndefined(value.equal))
-          operator = '='
-        if (!_.isUndefined(value.from) && !_.isUndefined(value.to))
-          operator = 'between'
-        else {
-          if (!_.isUndefined(value.from))
-            operator = '>='
-          if (!_.isUndefined(value.to))
-            operator = '<='
-        }
-      }
-    }
-    if (escapeKey !== false)
-      key = sqlString.escapeId(String(key))
-    if (escapeValue !== false)
-      value = app.escape(value, set)
-    return key + ' ' + operator + ' ' + value
   },
   filter: function (d) {
     return function (a) {
