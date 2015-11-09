@@ -1,4 +1,6 @@
 [![Linux Build][travis-image]][travis-url]
+[travis-image]: https://img.shields.io/travis/afanasy/db3-where/master.svg
+[travis-url]: https://travis-ci.org/afanasy/db3-where
 
 Filtering rules in JSON format
 
@@ -39,6 +41,3 @@ fruit.filter(where.filter({id: {'>=': 2, '<=': 3}}))
 // fruit will be
 // [{id: 2, name: 'Apple'}, {id: 3, name: 'Apple'}]
 ```
-
-[travis-image]: https://img.shields.io/travis/afanasy/db3-where/master.svg
-[travis-url]: https://travis-ci.org/afanasy/db3-where
