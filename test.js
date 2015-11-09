@@ -3,7 +3,7 @@ var
   expect = require('expect.js'),
   where = require('./')
 
-describe('where', function () {
+describe('#where', function () {
   describe('#query', function () {
     it('translates number', function () {
       expect(where.query(1)).to.be('`id` = 1')
