@@ -1,6 +1,6 @@
 [![Linux Build][travis-image]][travis-url]
 
-Filtering rules in JSON
+Filtering rules in JSON format
 
 ### When is this useful?
 If you want to use the same filtering rules for js `Array.filter` and SQL `where`.
